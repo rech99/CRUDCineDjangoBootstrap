@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container-fluid" >     
+    
+    <h2 class="container-fluid col-sm-12 col-md-8 col-lg-8 col-xl-8 my-3 display-3">Géneros</h2> 
+    
+    <div class="container-fluid col-sm-12 col-md-8 col-lg-8 col-xl-8 my-3">
+
+        <div class="text-right d-flex flex-row-reverse">
+            <a href="{% url 'crear_generos' %}" type="button" class="btn btn-primary">Agregar Generos</a>
+        </div>
+
+        <table class="table table-bordered my-3 text-center">
+            <thead>
+                <tr>
+                    <th class="text-center ">Género </th>
+                    <th class="text-center">Acciones </th>
+                                        
+                    </tr>   
+            </thead>
+            {% for genero in generos %}
+            <tbody>
+                <td class="text-center">{{genero.titulo}} </td>
+                <td>
+                    <div class="text-center d-flex justify-content-center gap-1">
+                            <a href="{% url 'genero_detalle' genero.id%}" class="btn btn-success text-center"><i class="bi bi-pen"></i></a>
+                            <form action="{% url 'eliminar_genero' genero.id %}" method="POST">
+                                {%csrf_token%}
+                                <button class="btn btn-danger "> <i class="bi bi-trash"></i> </button>
+                            </form>
+                            
+                    </div>
+                </td>
+            </tbody>
+            {% endfor %}
+        </table>
+    </div>    
+            
+    
+</div>
+
+
+{% endblock %}
